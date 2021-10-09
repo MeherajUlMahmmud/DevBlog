@@ -68,6 +68,7 @@ class ProfileModel(models.Model):
     image = models.ImageField(null=True, blank=True)
     gender = models.CharField(max_length=10, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
+    followers = models.IntegerField(default=0)
     followings = models.IntegerField(default=0, max_length=100)
     view_count = models.IntegerField(default=0)
 
