@@ -2,11 +2,19 @@ from django.db import models
 from user_control.models import UserModel
 
 
+
+class BlogCategoryModel(models.Model):
+    category = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.category
+
+
 class BlogModel(models.Model):
     author = models.ForeignKey(UserModel, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()
-    category = models.CharField(max_length=255, null=True, blank=True)
+    category = models.ForeignKey(BlogCategoryModel, null=True, blank=True, on_delete=models.SET_NULL)
     image = models.ImageField(null=True, blank=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, null=True, blank=True)
@@ -17,13 +25,6 @@ class BlogModel(models.Model):
 
     def __str__(self):
         return self.title + " by " + self.author.name
-
-
-class BlogCategoryModel(models.Model):
-    category = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.category
 
 
 class CommentModel(models.Model):
