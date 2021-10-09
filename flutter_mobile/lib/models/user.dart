@@ -30,7 +30,7 @@ class Profile {
   final int followings;
   final int viewCount;
 
-  Profile({this.id, this.uid, this.image, this.gender this.dateOfBirth, this.followers, this.followings, this.viewCount});
+  Profile({this.id, this.uid, this.image, this.gender, this.dateOfBirth, this.followers, this.followings, this.viewCount});
 
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
