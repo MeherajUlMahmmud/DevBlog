@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 
 from django.contrib.auth import authenticate
@@ -12,7 +13,19 @@ from .serializers import UserModelSerializer, ProfileModelSerializer
 
 @api_view(['GET'])
 def get_routes(request):
-    pass
+    routes = [
+        'api/blog/',
+        'api/blog/<id>/',
+        'api/blog/create-note/new',
+        'api/blog/update-note/<id>/',
+        'api/blog/delete-note/<id>/',
+
+        'api/user/login/',
+        'api/user/signup/',
+        'api/user/profile/',
+        'api/user/profile/update/',
+    ]
+    return Response(routes)
 
 
 @api_view(['POST'])
@@ -58,14 +71,16 @@ def signup_view(request):
 
 @api_view(['GET'])
 def get_user_profile(request):
-    user = request.user
+    user = UserModel.objects.get(id=request.user.id)
     profile = ProfileModel.objects.get(user=user)
-    serialized_data = ProfileModelSerializer(
+    serialized_user_data = UserModelSerializer(user, many=False).data
+    serialized_profile_data = ProfileModelSerializer(
         profile, many=False).data
-    return Response({"profile": serialized_data}, status=HTTP_200_OK)
+    return Response({"user": serialized_user_data, "profile": serialized_profile_data}, status=HTTP_200_OK)
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def follow_user(request):
     data = request.data
     user_id = data['user_id']
@@ -78,6 +93,7 @@ def follow_user(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def unfollow_user(request):
     data = request.data
     user_id = data['user_id']
@@ -103,7 +119,7 @@ def get_followers(request):
 
 
 @api_view(['GET'])
-def get_following(request):
+def get_followings(request):
     data = request.data
     user_id = data['user_id']
 
