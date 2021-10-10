@@ -74,35 +74,4 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
-  Widget appBar() {
-    return SizedBox(
-      height: AppBar().preferredSize.height,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8, left: 8),
-            child: Container(
-              width: AppBar().preferredSize.height - 8,
-              height: AppBar().preferredSize.height - 8,
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Text(
-                'Flutter UI',
-                style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
