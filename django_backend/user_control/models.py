@@ -69,7 +69,7 @@ class ProfileModel(models.Model):
     gender = models.CharField(max_length=10, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     followers = models.IntegerField(default=0)
-    followings = models.IntegerField(default=0, max_length=100)
+    followings = models.IntegerField(default=0)
     view_count = models.IntegerField(default=0)
 
     def __str__(self):
@@ -77,14 +77,14 @@ class ProfileModel(models.Model):
 
 
 class ProfileViewModel(models.Model):
-    viewer = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-    viewed = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    viewer = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='viewer')
+    viewed = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='viewed')
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
 class FollowModel(models.Model):
-    follower = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-    following = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    follower = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='follower')
+    following = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='following')
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
