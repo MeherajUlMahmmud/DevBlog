@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile/screens/main_screen.dart';
+import 'package:flutter_mobile/screens/navigation_main_screen.dart';
 import 'package:flutter_mobile/utils/constants.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: Constants.lightTheme,
-      home: MainScreen(),
+      home: NavigationMainScreen(),
     );
   }
 }
