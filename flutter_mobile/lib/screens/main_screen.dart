@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile/screens/blog_screens/blog_home.dart';
+import 'package:flutter_mobile/screens/blog_screens/categories_screen.dart';
 import 'package:flutter_mobile/screens/blog_screens/create_update_blog.dart';
+import 'package:flutter_mobile/screens/blog_screens/search_blog_screen.dart';
+import 'package:flutter_mobile/screens/user_screens/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
-
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -11,80 +14,95 @@ class _MainScreenState extends State<MainScreen> {
   final _fabIconColor = Colors.white;
   final _bottomNavIconColor = Colors.grey;
 
-  int _index = 0;
+  int _currentIndex = 0;
+  final List _children = [
+    BlogHomeScreen(),
+    CategoriesScreen(),
+    SearchScreen(),
+    ProfileScreen(),
+  ];
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('DevBlog'),
-        elevation: 0.0,
+        centerTitle: true,
       ),
-      body: Scaffold(
-        body: Center(
-          child: Text('MainScreen'),
+      body: _children[_currentIndex],
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return CreateUpdateBlogScreen();
+          }));
+        },
+        tooltip: 'Write New Blog',
+        child: Icon(
+          Icons.edit_rounded,
+          color: _fabIconColor,
         ),
       ),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.black,
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return CreateUpdateBlogScreen();
-              }));
-            },
-            tooltip: '',
-            child: Icon(
-              Icons.add,
-              color: _fabIconColor,
-            )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        shape: CircularNotchedRectangle(),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.home_outlined),
-              color: _bottomNavIconColor,
-              onPressed: (){
-                setState(() {
-                  _index = 0;
-                });
-              }
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: _bottomNavIconColor,
+        items: [
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.category_outlined),
+            label: 'Categories',
+          ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.search_outlined),
+            label: 'Search',
+          ),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline), label: 'Profile')
+        ],
+      ),
+    );
+  }
+
+  Widget appBar() {
+    return SizedBox(
+      height: AppBar().preferredSize.height,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 8),
+            child: Container(
+              width: AppBar().preferredSize.height - 8,
+              height: AppBar().preferredSize.height - 8,
             ),
-            IconButton(
-              icon: Icon(Icons.category_outlined),
-              color: _bottomNavIconColor,
-              onPressed: (){
-                setState(() {
-                  _index = 1;
-                });
-              }
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                'Flutter UI',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
-            IconButton(
-              icon: Icon(Icons.search_outlined),
-              color: _bottomNavIconColor,
-              onPressed: (){
-                setState(() {
-                  _index = 2;
-                });
-              }
-            ),
-            IconButton(
-              icon: Icon(Icons.person_outline),
-              color: _bottomNavIconColor,
-              onPressed: (){
-                setState(() {
-                  _index = 3;
-                });
-              }
-            )
-          ]
-        )
-      )
+          ),
+        ],
+      ),
     );
   }
 }
