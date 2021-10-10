@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile/screens/main_screen.dart';
 import 'package:flutter_mobile/screens/util_screens/change_password.dart';
+import 'package:flutter_mobile/screens/util_screens/deactivate_account.dart';
 import 'package:flutter_mobile/screens/util_screens/feedback.dart';
 import 'package:flutter_mobile/utils/util_func.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,28 +61,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ListView(
                 children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.feedback),
-                    title: Text('Send Feedback'),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => FeedbackScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text('About'),
-                    onTap: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => AboutScreen(),
-                      //   ),
-                      // );
-                    },
-                  ),
                   isLoggedIn
                       ? Column(
                           children: [
@@ -92,43 +71,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => ChangePasswordScreen(),
+                                    builder: (context) =>
+                                        ChangePasswordScreen(),
                                   ),
                                 );
                               },
                             ),
                             ListTile(
-                              leading: Icon(Icons.exit_to_app),
-                              title: Text('Logout'),
+                              leading: Icon(Icons.info),
+                              title: Text('Deactivate Account'),
                               onTap: () {
-                                // show dialog
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text('Logout'),
-                                    content: Text(
-                                        'Are you sure you want to logout?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Yes'),
-                                        onPressed: () {
-                                          UtilityFunction.clearSharedPreferences(context);
-                                          Navigator.of(context).pop();
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MainScreen(),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: Text('No'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DeactivateAccountScreen(),
                                   ),
                                 );
                               },
