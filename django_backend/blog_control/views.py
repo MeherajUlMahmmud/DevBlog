@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 
 from django.contrib.auth import authenticate
@@ -35,6 +36,7 @@ def get_blogs(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_blog(request):
     user = request.user
     if user.is_authenticated:
@@ -58,8 +60,16 @@ def get_blog(request, blog_id):
 
 
 @api_view(['POST'])
-
+@permission_classes([IsAuthenticated])
 def create_comment(request, blog_id):
     data = request.data
     user = request.user
 
+    CommentModel.objects.create(
+        author=user,
+        blog=BlogModel.objects.get(id=blog_id),
+        content=data['content']
+    )
+    comments = CommentModel.objects.filter(blog=blog_id)
+    serialized_comment_data = CommentModelSerializer(comments, many=True).data
+    return Response(serialized_comment_data, status=HTTP_200_OK)
