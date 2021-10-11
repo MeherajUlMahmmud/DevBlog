@@ -1,6 +1,6 @@
+import 'package:DevBlog/utils/util_func.dart';
+import 'package:DevBlog/utils/validators.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile/utils/util_func.dart';
-import 'package:flutter_mobile/utils/validators.dart';
 
 class FeedbackScreen extends StatefulWidget {
   @override
@@ -43,147 +43,136 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Feedback'),
-          centerTitle: true,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: <Widget>[
-              SizedBox(height: 10),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Theme(
-                  child: TextFormField(
-                    maxLines: null,
-                    textCapitalization: TextCapitalization.sentences,
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person_outline),
-                      labelText: "Your Name",
-                      labelStyle: TextStyle(),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(color: Theme.of(context).accentColor),
+    return Container(
+      color: Color(0xFFFEFEFE),
+      child: SafeArea(
+        top: false,
+        child: Scaffold(
+          backgroundColor: Color(0xFFFEFEFE),
+          body: SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 250,
+                    width: 250,
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top,
+                        left: 16,
+                        right: 16),
+                    child: Image.asset('assets/images/feedbackImage.png'),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      'Your FeedBack',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  data: Theme.of(context).copyWith(
-                    primaryColor: Theme.of(context).accentColor,
+                  Container(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: const Text(
+                      'Give your best time for this moment.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
-                ),
+                  _buildComposer(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Center(
+                      child: Container(
+                        width: 120,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(4.0)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.6),
+                                offset: const Offset(4, 4),
+                                blurRadius: 8.0),
+                          ],
+                        ),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              FocusScope.of(context).requestFocus(FocusNode());
+                            },
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  'Send',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              SizedBox(height: 10),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Theme(
-                  child: TextFormField(
-                    maxLines: null,
-                    textCapitalization: TextCapitalization.sentences,
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email_outlined),
-                      labelText: "Your Email",
-                      labelStyle: TextStyle(),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(color: Theme.of(context).accentColor),
-                      ),
-                    ),
-                  ),
-                  data: Theme.of(context).copyWith(
-                    primaryColor: Theme.of(context).accentColor,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Theme(
-                  child: TextFormField(
-                    maxLines: null,
-                    textCapitalization: TextCapitalization.sentences,
-                    controller: _subjectController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.subject),
-                      labelText: "Subject",
-                      labelStyle: TextStyle(),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(color: Theme.of(context).accentColor),
-                      ),
-                    ),
-                  ),
-                  data: Theme.of(context).copyWith(
-                    primaryColor: Theme.of(context).accentColor,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Theme(
-                  child: TextFormField(
-                    maxLines: null,
-                    textCapitalization: TextCapitalization.sentences,
-                    controller: _messageController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.message_outlined),
-                      labelText: "Message",
-                      labelStyle: TextStyle(),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(color: Theme.of(context).accentColor),
-                      ),
-                    ),
-                  ),
-                  data: Theme.of(context).copyWith(
-                    primaryColor: Theme.of(context).accentColor,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                height: 50.0,
-                child: ElevatedButton(
-                  child: Text(
-                    "Send Feedback",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () {
-                    _sendFeedback();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).accentColor,
-                    onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  Widget _buildComposer() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, left: 32, right: 32),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.8),
+                offset: const Offset(4, 4),
+                blurRadius: 8),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: Container(
+            padding: const EdgeInsets.all(4.0),
+            constraints: const BoxConstraints(minHeight: 80, maxHeight: 160),
+            color: Colors.white,
+            child: SingleChildScrollView(
+              padding:
+                  const EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 0),
+              child: TextField(
+                maxLines: null,
+                onChanged: (String txt) {},
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 16,
+                  color: Color(0xFF313A44),
+                ),
+                cursorColor: Colors.blue,
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Enter your feedback...'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

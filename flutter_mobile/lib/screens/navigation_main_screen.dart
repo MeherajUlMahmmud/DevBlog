@@ -1,9 +1,9 @@
+import 'package:DevBlog/screens/main_screen.dart';
+import 'package:DevBlog/screens/util_screens/feedback.dart';
+import 'package:DevBlog/screens/util_screens/settings.dart';
+import 'package:DevBlog/widgets/drawer_user_controller.dart';
+import 'package:DevBlog/widgets/home_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile/screens/main_screen.dart';
-import 'package:flutter_mobile/screens/util_screens/feedback.dart';
-import 'package:flutter_mobile/screens/util_screens/settings.dart';
-import 'package:flutter_mobile/widgets/drawer_user_controller.dart';
-import 'package:flutter_mobile/widgets/home_drawer.dart';
 
 class NavigationMainScreen extends StatefulWidget {
   @override

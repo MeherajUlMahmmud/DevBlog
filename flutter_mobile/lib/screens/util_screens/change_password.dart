@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile/utils/util_func.dart';
-import 'package:flutter_mobile/utils/validators.dart';
+import 'package:DevBlog/utils/util_func.dart';
+import 'package:DevBlog/utils/validators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePasswordScreen extends StatefulWidget {

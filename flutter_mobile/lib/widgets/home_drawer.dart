@@ -1,5 +1,5 @@
+import 'package:DevBlog/utils/util_func.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile/utils/util_func.dart';
 
 class HomeDrawer extends StatefulWidget {
   const HomeDrawer(
@@ -111,7 +111,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                             child: ClipRRect(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(60.0)),
-                              child: Image.asset('assets/userImage.png'),
+                              child: Image.asset('assets/images/userImage.png'),
                             ),
                           ),
                         ),

@@ -1,9 +1,10 @@
+import 'package:DevBlog/screens/blog_screens/blog_home.dart';
+import 'package:DevBlog/screens/blog_screens/categories_screen.dart';
+import 'package:DevBlog/screens/blog_screens/create_update_blog.dart';
+import 'package:DevBlog/screens/blog_screens/search_blog_screen.dart';
+import 'package:DevBlog/screens/user_screens/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile/screens/blog_screens/blog_home.dart';
-import 'package:flutter_mobile/screens/blog_screens/categories_screen.dart';
-import 'package:flutter_mobile/screens/blog_screens/create_update_blog.dart';
-import 'package:flutter_mobile/screens/blog_screens/search_blog_screen.dart';
-import 'package:flutter_mobile/screens/user_screens/profile_screen.dart';
+
 
 class MainScreen extends StatefulWidget {
   @override
