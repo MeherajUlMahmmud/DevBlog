@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:DevBlog/screens/main_screen.dart';
 import 'package:DevBlog/screens/util_screens/change_password.dart';
 import 'package:DevBlog/screens/util_screens/deactivate_account.dart';
-import 'package:DevBlog/screens/util_screens/feedback.dart';
-import 'package:DevBlog/utils/util_func.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
