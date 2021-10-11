@@ -9,6 +9,13 @@ class DeactivateAccountScreen extends StatefulWidget {
 class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Deactivate Account'),
+      ),
+      body: Center(
+        child: Text('Deactivate Account'),
+      ),
+    );
   }
 }
