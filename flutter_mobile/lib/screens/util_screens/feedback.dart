@@ -83,7 +83,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       ),
                     ),
                   ),
-                  _buildComposer(),
+                  _buildComposer("Enter your name"),
+                  _buildComposer("Enter your email"),
+                  _buildComposer("Enter subject"),
+                  _buildComposer("Enter your feedback..."),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Center(
@@ -133,7 +136,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     );
   }
 
-  Widget _buildComposer() {
+  Widget _buildComposer(String hint) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, left: 32, right: 32),
       child: Container(
@@ -151,7 +154,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           borderRadius: BorderRadius.circular(25),
           child: Container(
             padding: const EdgeInsets.all(4.0),
-            constraints: const BoxConstraints(minHeight: 80, maxHeight: 160),
+            constraints: BoxConstraints(
+              minHeight: 50,
+              maxHeight: 160,
+            ),
             color: Colors.white,
             child: SingleChildScrollView(
               padding:
@@ -166,8 +172,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
                 cursorColor: Colors.blue,
                 decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Enter your feedback...'),
+                  border: InputBorder.none,
+                  hintText: hint,
+                ),
               ),
             ),
           ),
