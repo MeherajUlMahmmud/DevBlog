@@ -1,3 +1,4 @@
+import 'package:DevBlog/screens/auth_screens/login_screen.dart';
 import 'package:DevBlog/utils/util_func.dart';
 import 'package:flutter/material.dart';
 
@@ -198,11 +199,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
             onPressed: () {
               UtilityFunction.clearSharedPreferences(context);
               Navigator.of(context).pop();
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => MainScreen(),
-              //   ),
-              // );
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ),
+              );
             },
           ),
           TextButton(
