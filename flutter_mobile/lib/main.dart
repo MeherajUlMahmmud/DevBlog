@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:DevBlog/screens/navigation_main_screen.dart';
+import 'package:DevBlog/screens/util_screens/splash_screen.dart';
 import 'package:DevBlog/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: Constants.lightTheme,
-      home: NavigationMainScreen(),
+      home: SplashScreen(),
     );
   }
 }
