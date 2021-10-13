@@ -1,0 +1,109 @@
+.top {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  align-items: center;
+  font-family: sans-serif;
+  z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.topLeft,
+.topRight {
+  display: flex;
+  flex: 3;
+  align-items: center;
+  justify-content: center;
+}
+
+.topCenter {
+  flex: 6;
+}
+
+.topIcon {
+  font-size: 25px;
+  margin-right: 10px;
+  color: #444;
+  cursor: pointer;
+}
+
+.topImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.topList {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.topListItem {
+  font-size: 20px;
+  margin-left: 20px;
+  font-weight: 300;
+  cursor: pointer;
+}
+.topSearchIcon {
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.topSaparator {
+  width: 100%;
+  height: 0.5px;
+  background-color: black;
+}
+
+@media screen and (max-width: 720px) {
+  .topLeft {
+    display: none;
+  }
+  .topListItem {
+    font-size: 18px;
+  }
+  .top {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+  }
+  .topRight {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .topImage {
+    margin-right: 20px;
+  }
+  .topSearchIcon {
+    font-size: 30px;
+  }
+}
+
+.topSearchIcon:hover,
+.topListItem:hover {
+  box-shadow: rgba(255, 0, 0, 0.1) 0px 1px 0px;
+}
+@media screen and (max-width: 420px) {
+  .topListItem {
+    font-size: 15px;
+    margin-left: 15px;
+    font-weight: 300;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 280px) {
+  .topListItem {
+    font-size: 12px;
+    margin-left: 15px;
+    font-weight: 300;
+    cursor: pointer;
+  }
+}
