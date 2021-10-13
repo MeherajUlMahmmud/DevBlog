@@ -19,26 +19,32 @@ const Topbar = () => {
                 HOME
               </Link>
             </li>
-            <li className="topListItem">
-              <Link to="/settings" className="link">
-                {user && "PROFILE"}
-              </Link>
-            </li>
+            {user && (
+              <li className="topListItem">
+                <Link to="/settings" className="link">
+                  PROFILE
+                </Link>
+              </li>
+            )}
             <li className="topListItem">
               <Link to="/" className="link">
                 CONTACT
               </Link>
             </li>
-            <li className="topListItem">
-              <Link to="/write" className="link">
-                WRITE
-              </Link>
-            </li>
-            <li className="topListItem">
-              <Link to="/" className="link">
-                {user && "LOGOUT"}
-              </Link>
-            </li>
+            {user && (
+              <li className="topListItem">
+                <Link to="/write" className="link">
+                  WRITE
+                </Link>
+              </li>
+            )}
+            {user && (
+              <li className="topListItem">
+                <Link to="/" className="link">
+                  LOGOUT
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
         <div className="topRight">
