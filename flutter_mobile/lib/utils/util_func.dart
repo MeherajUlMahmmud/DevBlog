@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UtilityFunction {
@@ -42,5 +43,11 @@ class UtilityFunction {
         duration: Duration(seconds: 1),
       ),
     );
+  }
+
+  static String stringToDateTime(String date) {
+    var dateTime = DateTime.parse(date);
+    var formatter = new DateFormat('MMM. dd, yyyy, hh:mm a');
+    return formatter.format(dateTime);
   }
 }
