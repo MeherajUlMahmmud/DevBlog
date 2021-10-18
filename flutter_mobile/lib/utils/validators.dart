@@ -1,14 +1,17 @@
 class Validator {
   static bool isValidName(String name) {
-    if (name.isEmpty || name.length < 3) {
+    Pattern pattern =
+        r'^[a-zA-Z]{2,}(?: [a-zA-Z]+){0,2}$'; //regex for name
+    RegExp regex = new RegExp(pattern);
+    if (regex.hasMatch(name))
+      return true;
+    else
       return false;
-    }
-    return true;
   }
 
   static bool isValidEmail(String email) {
     Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'; //regex for email
     RegExp regex = new RegExp(pattern);
     if (email.isEmpty || !regex.hasMatch(email)) {
       return false;
@@ -17,7 +20,10 @@ class Validator {
   }
 
   static bool isValidPassword(String password) {
-    if (password.isEmpty || password.length < 8) {
+    Pattern pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$'; //regex for password
+    RegExp regex = new RegExp(pattern);
+    if (password.isEmpty || !regex.hasMatch(password)) {
       return false;
     }
     return true;
@@ -31,7 +37,9 @@ class Validator {
   }
 
   static bool isValidPhone(String phone) {
-    if (phone.isEmpty || phone.length < 11) {
+    Pattern pattern = r'^\d{11}$'; //regex for phone
+    RegExp regex = new RegExp(pattern);
+    if (phone.isEmpty || !regex.hasMatch(phone)) {
       return false;
     }
     return true;
@@ -52,7 +60,7 @@ class Validator {
   }
 
   static bool isValidComment(String comment) {
-    if (comment.isEmpty || comment.length < 3) {
+    if (comment.isEmpty) {
       return false;
     }
     return true;
