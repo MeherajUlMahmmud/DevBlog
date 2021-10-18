@@ -11,6 +11,15 @@ class _MyBlogsScreenState extends State<MyBlogsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Blogs'),
+        centerTitle: true,
+        elevation: 0.0,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(
+            Icons.chevron_left_outlined,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: Center(
         child: Text('My Blogs'),
