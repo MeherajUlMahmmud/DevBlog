@@ -16,6 +16,14 @@ class _CategorizedBlogScreenState extends State<CategorizedBlogScreen> {
       appBar: AppBar(
         title: Text(widget.category),
         centerTitle: true,
+        elevation: 0.0,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(
+            Icons.chevron_left_outlined,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: ListView(
         children: [
