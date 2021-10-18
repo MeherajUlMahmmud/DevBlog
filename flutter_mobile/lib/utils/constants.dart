@@ -7,7 +7,14 @@ class Constants {
 
   static String loginUrl = USER_API + "login/";
   static String registerUrl = USER_API + "register/";
+  static String getUserDetailsUrl = USER_API + "profile/";
+  static String updateUserInfoUrl = USER_API + "update_user/";
+  static String updateProfileInfoUrl = USER_API + "update_profile/";
+  static String updateProfileImageUrl = USER_API + "update_profile_image/";
+  static String updatePasswordUrl = USER_API + "update_password/";
 
+
+  static String sendFeedbackUrl = API + "feedback/";
 
   static Color lightPrimary = Colors.white;
   static Color darkPrimary = Colors.black;
