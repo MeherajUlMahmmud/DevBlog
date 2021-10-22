@@ -6,6 +6,19 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _dateOfBirthController = TextEditingController();
+
+  String dropdownvalue = 'Male';
+  var items = [
+    'Male',
+    'Female',
+    'Other',
+  ];
+
+  DateTime selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +34,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            // circular image
             Container(
               height: 200,
               width: 200,
@@ -39,6 +50,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
             SizedBox(height: 10),
+            _buildTextField("Name", Icons.perm_identity, _nameController),
+            SizedBox(height: 10),
+            _buildTextField("Email", Icons.email_outlined, _emailController),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(top: 16, left: 32, right: 32),
               child: Container(
@@ -52,34 +67,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         blurRadius: 8),
                   ],
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(4.0),
-                    constraints: BoxConstraints(
-                      minHeight: 50,
-                      maxHeight: 160,
-                    ),
-                    color: Colors.white,
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, top: 0, bottom: 0),
-                      child: TextField(
-                        maxLines: null,
-                        onChanged: (String txt) {},
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 16,
-                          color: Color(0xFF313A44),
-                        ),
-                        cursorColor: Colors.blue,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Name",
-                        ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 3.0),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.grey,
                       ),
                     ),
-                  ),
+                    SizedBox(width: 15),
+                    Expanded(
+                      child: DropdownButton(
+                        elevation: 3,
+                        isExpanded: true,
+                        underline: Container(height: 0),
+                        value: dropdownvalue,
+                        icon: Icon(Icons.keyboard_arrow_down),
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                              value: items, child: Text(items));
+                        }).toList(),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownvalue = newValue;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -105,69 +121,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       minHeight: 50,
                       maxHeight: 160,
                     ),
-                    color: Colors.white,
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, top: 0, bottom: 0),
-                      child: TextField(
-                        maxLines: null,
-                        onChanged: (String txt) {},
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 16,
-                          color: Color(0xFF313A44),
-                        ),
-                        cursorColor: Colors.blue,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Email",
-                        ),
+                    child: TextField(
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                      controller: _dateOfBirthController,
+                      readOnly: true,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF313A44),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 16, left: 32, right: 32),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.8),
-                        offset: const Offset(4, 4),
-                        blurRadius: 8),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    padding: const EdgeInsets.all(4.0),
-                    constraints: BoxConstraints(
-                      minHeight: 50,
-                      maxHeight: 160,
-                    ),
-                    color: Colors.white,
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, top: 0, bottom: 0),
-                      child: TextField(
-                        maxLines: null,
-                        onChanged: (String txt) {},
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 16,
-                          color: Color(0xFF313A44),
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.calendar_today,
+                          color: Colors.grey,
                         ),
-                        cursorColor: Colors.blue,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Phone Number",
-                        ),
+                        border: InputBorder.none,
+                        hintText: "Date of Birth",
                       ),
                     ),
                   ),
@@ -197,7 +167,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: Text(
                       'Update',
                       style: TextStyle(
-                        fontFamily: 'Roboto',
                         fontSize: 16,
                         color: Colors.white,
                       ),
@@ -207,6 +176,61 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1900, 1),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        _dateOfBirthController.text =
+            "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+      });
+  }
+
+  _buildTextField(String hintText, IconData icon, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, left: 32, right: 32),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.8),
+                offset: const Offset(4, 4),
+                blurRadius: 8),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: Container(
+            padding: const EdgeInsets.all(4.0),
+            constraints: BoxConstraints(
+              minHeight: 50,
+              maxHeight: 160,
+            ),
+            color: Colors.white,
+            child: TextField(
+              controller: controller,
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF313A44),
+              ),
+              decoration: InputDecoration(
+                icon: Icon(icon, color: Colors.grey),
+                border: InputBorder.none,
+                hintText: hintText,
+              ),
+            ),
+          ),
         ),
       ),
     );
