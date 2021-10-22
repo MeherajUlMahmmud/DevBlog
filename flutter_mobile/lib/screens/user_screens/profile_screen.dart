@@ -1,7 +1,6 @@
 import 'package:DevBlog/screens/blog_screens/my_blogs.dart';
 import 'package:DevBlog/screens/user_screens/edit_profile_screen.dart';
 import 'package:DevBlog/screens/util_screens/full_screen_image.dart';
-import 'package:DevBlog/widgets/blog_card.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -203,13 +202,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ListTile(
               title: Text(
-                "Phone",
+                "Gender",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              subtitle: Text("+880 1814 325624"),
+              subtitle: Text("Male"),
+              // subtitle: Text(_profile['phone'] == null
+              //     ? "Not Specified"
+              //     : _profile['phone'],
+              // ),
+            ),
+            ListTile(
+              title: Text(
+                "Date of Birth",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              subtitle: Text("31 Jan 1999"),
               // subtitle: Text(_profile['phone'] == null
               //     ? "Not Specified"
               //     : _profile['phone'],
@@ -254,16 +267,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Divider(),
-
-            // Container(
-            //   height: MediaQuery.of(context).size.height * 0.7,
-            //   child: ListView.builder(
-            //     itemCount: 10,
-            //     itemBuilder: (context, index) {
-            //       return BlogCard();
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),
