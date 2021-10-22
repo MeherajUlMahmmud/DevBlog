@@ -20,10 +20,7 @@ class Validator {
   }
 
   static bool isValidPassword(String password) {
-    Pattern pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$'; //regex for password
-    RegExp regex = new RegExp(pattern);
-    if (password.isEmpty || !regex.hasMatch(password)) {
+    if (password.isEmpty || password.length < 8) {
       return false;
     }
     return true;
