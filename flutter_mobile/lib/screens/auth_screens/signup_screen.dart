@@ -1,5 +1,9 @@
 import 'package:DevBlog/screens/auth_screens/login_screen.dart';
+import 'package:DevBlog/services/user_service.dart';
+import 'package:DevBlog/utils/util_func.dart';
+import 'package:DevBlog/utils/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -7,6 +11,47 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String _name, _email, _password, _confirmPassword;
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
+  void _registerUser() {
+    _name = _nameController.text;
+    _email = _emailController.text;
+    _password = _passwordController.text;
+    _confirmPassword = _confirmPasswordController.text;
+
+    if (Validator.isValidName(_name) &&
+        Validator.isValidEmail(_email) &&
+        Validator.isValidPassword(_password) &&
+        Validator.isValidConfirmPassword(_password, _confirmPassword)) {
+      UserService().registerUser(_name, _email, _password).then((response) {
+        if (response.isSuccessful) {
+          UtilityFunction.showSnackbar(
+              context, "Account creation successful", true);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        } else {
+          UtilityFunction.showAlertDialog(
+              context, "Error", response.message, false);
+        }
+      });
+    } else if (!Validator.isValidName(_name)) {
+      UtilityFunction.showSnackbar(
+          context, 'Name must be at least 3 characters long', false);
+    } else if (!Validator.isValidEmail(_email)) {
+      UtilityFunction.showSnackbar(
+          context, 'Please enter a valid email', false);
+    } else if (!Validator.isValidPassword(_password)) {
+      UtilityFunction.showSnackbar(
+          context, 'Password must be at least 8 characters long', false);
+    } else if (!Validator.isValidConfirmPassword(_password, _confirmPassword)) {
+      UtilityFunction.showSnackbar(context, 'Passwords do not match', false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             TextFormField(
               keyboardType: TextInputType.name,
+              controller: _nameController,
               decoration: InputDecoration(
                 labelText: "Name",
                 labelStyle: TextStyle(
@@ -38,6 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: "E-mail",
                 labelStyle: TextStyle(
@@ -51,6 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             TextFormField(
               keyboardType: TextInputType.text,
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Password",
@@ -65,6 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             TextFormField(
               keyboardType: TextInputType.text,
+              controller: _confirmPasswordController,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Confirm Password",
@@ -88,7 +137,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  _registerUser();
+                },
               ),
             ),
             SizedBox(
