@@ -12,6 +12,15 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Deactivate Account'),
+        centerTitle: true,
+        elevation: 0.0,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(
+            Icons.chevron_left_outlined,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: Center(
         child: Text('Deactivate Account'),

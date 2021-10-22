@@ -16,7 +16,6 @@ class _CategorizedBlogScreenState extends State<CategorizedBlogScreen> {
       appBar: AppBar(
         title: Text(widget.category),
         centerTitle: true,
-        elevation: 0.0,
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(

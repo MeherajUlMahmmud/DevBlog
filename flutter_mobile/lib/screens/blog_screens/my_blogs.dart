@@ -12,7 +12,6 @@ class _MyBlogsScreenState extends State<MyBlogsScreen> {
       appBar: AppBar(
         title: Text('My Blogs'),
         centerTitle: true,
-        elevation: 0.0,
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(
