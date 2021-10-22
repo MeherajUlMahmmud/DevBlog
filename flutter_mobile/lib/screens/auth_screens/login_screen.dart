@@ -1,5 +1,8 @@
 import 'package:DevBlog/screens/auth_screens/signup_screen.dart';
 import 'package:DevBlog/screens/navigation_main_screen.dart';
+import 'package:DevBlog/services/user_service.dart';
+import 'package:DevBlog/utils/util_func.dart';
+import 'package:DevBlog/utils/validators.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -8,6 +11,39 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String _email, _password;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  void _loginUser() {
+    _email = _emailController.text;
+    _password = _passwordController.text;
+
+    // if (Validator.isValidEmail(_email) &&
+    //     Validator.isValidPassword(_password)) {
+    // UserService().loginUser(_email, _password).then((response) {
+    //   if (response.isSuccessful) {
+    //     Navigator.pushReplacement(context,
+    //         MaterialPageRoute(builder: (context) => NavigationMainScreen()));
+    //   } else {
+    //     UtilityFunction.showAlertDialog(
+    //         context, "Error", response.message, false);
+    //   }
+    // });
+    // } else if (!Validator.isValidEmail(_email)) {
+    //   UtilityFunction.showSnackbar(context, "Enter a valid Email", false);
+    // } else if (!Validator.isValidPassword(_password)) {
+    //   UtilityFunction.showSnackbar(
+    //       context, "Password must be at least 8 characters long", false);
+    // } else {
+    //   UtilityFunction.showSnackbar(
+    //       context, "Enter a valid Email and Password", false);
+    // }
+
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => NavigationMainScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: "E-mail",
                 labelStyle: TextStyle(
@@ -40,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextFormField(
               keyboardType: TextInputType.text,
               obscureText: true,
+              controller: _passwordController,
               decoration: InputDecoration(
                 labelText: "Password",
                 labelStyle: TextStyle(
@@ -74,11 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.left,
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NavigationMainScreen()),
-                  );
+                  _loginUser();
                 },
               ),
             ),
