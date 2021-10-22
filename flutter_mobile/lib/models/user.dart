@@ -1,5 +1,5 @@
 class User {
-  final int id;
+  final String id;
   final String name;
   final String email;
   final String slug;
@@ -18,30 +18,68 @@ class User {
       isActive: json['is_active'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['slug'] = this.slug;
+    data['token'] = this.token;
+    data['is_active'] = this.isActive;
+    return data;
+  }
 }
 
 class Profile {
-  final int id;
-  final int uid;
-  final String image;
+  final String id;
+  final String uid;
+  final String imageUrl;
   final String gender;
   final String dateOfBirth;
-  final int followers;
-  final int followings;
-  final int viewCount;
+  final String followers;
+  final String followings;
+  final String viewCount;
 
-  Profile({this.id, this.uid, this.image, this.gender, this.dateOfBirth, this.followers, this.followings, this.viewCount});
+  Profile({this.id, this.uid, this.imageUrl, this.gender, this.dateOfBirth, this.followers, this.followings, this.viewCount});
 
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
       id: json['id'],
       uid: json['uid'],
-      image: json['image'],
+      imageUrl: json['image'],
       gender: json['gender'],
       dateOfBirth: json['date_of_birth'],
       followers: json['followers'],
       followings: json['followings'],
       viewCount: json['viewCount'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['uid'] = this.uid;
+    data['image'] = this.imageUrl;
+    data['gender'] = this.gender;
+    data['date_of_birth'] = this.dateOfBirth;
+    data['followers'] = this.followers;
+    data['followings'] = this.followings;
+    data['viewCount'] = this.viewCount;
+    return data;
+  }
+}
+
+class UserProfile {
+  User user;
+  Profile profile;
+
+  UserProfile({this.user, this.profile});
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return UserProfile(
+      user: User.fromJson(json['user']),
+      profile: Profile.fromJson(json['profile']),
     );
   }
 }
