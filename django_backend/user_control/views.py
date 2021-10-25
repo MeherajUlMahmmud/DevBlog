@@ -176,7 +176,14 @@ def update_user(request):  # edit profile view
             user.email = email
 
         user.save()
-        return Response(status=HTTP_200_OK)
+
+        user = UserModel.objects.get(id=request.user.id)
+        profile = ProfileModel.objects.get(user=user)
+
+        serialized_user_data = UserModelSerializer(user, many=False).data
+        serialized_profile_data = ProfileModelSerializer(
+            profile, many=False).data
+        return Response({"user": serialized_user_data, "profile": serialized_profile_data}, status=HTTP_200_OK)
     except:
         return Response(status=HTTP_404_NOT_FOUND)
 
