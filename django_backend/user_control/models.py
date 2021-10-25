@@ -42,6 +42,7 @@ class UserModel(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=250)
     slug = models.CharField(max_length=255, null=True, blank=True)
+    token = models.CharField(max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
